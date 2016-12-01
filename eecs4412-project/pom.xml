@@ -61,9 +61,10 @@
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.0.0</version>
 				<configuration>
-					<descriptorRefs>
-						<descriptorRef>jar-with-dependencies</descriptorRef>
-					</descriptorRefs>
+					<descriptors>
+						<descriptor>src/main/resources/asseembler.xml</descriptor>
+					</descriptors>
+					<finalName>mailfilter</finalName>
 					<archive>
 						<manifest>
 							<mainClass>${main.class}</mainClass>
