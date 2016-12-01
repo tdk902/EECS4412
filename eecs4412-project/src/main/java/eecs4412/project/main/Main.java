@@ -27,7 +27,7 @@ import eecs4412.project.util.PorterStemmer;
 
 public class Main {
     
-    // *** feilds
+    // *** Fields
     private InvertedIndexFile invertedIndexFile;
     private Set<String> stopWords = new HashSet<>();
     private double upperPercentile = DEFAULT_UPPER_PERCENTILE;
