@@ -71,6 +71,7 @@
 							<descriptors>
 								<descriptor>src/main/resources/assembler.xml</descriptor>
 							</descriptors>
+							<finalName>mail</finalName>
 						</configuration>
 					</execution>
 				</executions>

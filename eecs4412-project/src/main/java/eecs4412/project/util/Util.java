@@ -137,7 +137,7 @@ public final class Util {
     // *** helper method 
     private static void printUsageAndExit(Options options) {
         HelpFormatter formatter = new HelpFormatter();
-        formatter.printHelp("mailfilter", options, true);
+        formatter.printHelp("mail-filter", options, true);
         System.exit(1);
     }
 }
