@@ -60,17 +60,9 @@
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
 				<version>3.0.0</version>
-				<configuration>
-					<descriptors>
-						<descriptor>src/main/resources/assembler.xml</descriptor>
-					</descriptors>
-					<finalName>mailfilter</finalName>
-					<archive>
-						<manifest>
-							<mainClass>${main.class}</mainClass>
-						</manifest>
-					</archive>
-				</configuration>
+				<!-- <configuration> <descriptors> <descriptor>src/main/resources/assembler.xml</descriptor> 
+					</descriptors> <finalName>mailfilter</finalName> <archive> <manifest> <mainClass>${main.class}</mainClass> 
+					</manifest> </archive> </configuration> -->
 				<executions>
 					<execution>
 						<id>make-assembly</id>
@@ -78,6 +70,12 @@
 						<goals>
 							<goal>single</goal>
 						</goals>
+						<configuration>
+							<descriptors>
+								<descriptor>src/main/resources/assembler.xml</descriptor>
+							</descriptors>
+							<finalName>mailfilter</finalName>
+						</configuration>
 					</execution>
 				</executions>
 			</plugin>
