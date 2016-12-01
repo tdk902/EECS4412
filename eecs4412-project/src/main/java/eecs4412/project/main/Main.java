@@ -6,9 +6,7 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.UncheckedIOException;
 import java.nio.charset.Charset;
-import java.nio.file.DirectoryStream.Filter;
 import java.nio.file.Files;
-import java.nio.file.LinkOption;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Arrays;
@@ -29,15 +27,7 @@ import eecs4412.project.util.PorterStemmer;
 
 public class Main {
     
-    public static final Consumer<Object> PRINTER = System.out::println;
-    public static final Filter<Path> FILES_ONLY = new Filter<Path>(){
-        @Override
-        public boolean accept(Path entry) throws IOException {
-            return Files.isRegularFile(entry, LinkOption.NOFOLLOW_LINKS);
-        }
-    };
-
-    // *** Shared resource
+    // *** feilds
     private InvertedIndexFile invertedIndexFile;
     private Set<String> stopWords = new HashSet<>();
     private double upperPercentile = DEFAULT_UPPER_PERCENTILE;
@@ -46,7 +36,7 @@ public class Main {
     private Set<String> selectedAttributes = new TreeSet<>();
     
     /**
-     * 
+     * Produce test ARFF file to outputPath form inputPath
      * @param inputPath
      * @throws IOException
      */
@@ -66,7 +56,7 @@ public class Main {
 
     
     /**
-     * Main function that is run in this class
+     * Produce train ARFF file to outputPath form inputPath
      * @param inputPath
      * @param stopWordsPath
      * @throws IOException
@@ -87,7 +77,7 @@ public class Main {
     }
     
     /**
-     * 
+     * Build ARFF file from the InvertedIndexFile
      * @return
      */
     public Consumer<InvertedIndexFile> arffBuilder() {
@@ -113,7 +103,7 @@ public class Main {
     }
 
     /**
-     * Consume the passed in PATH
+     * Consume the passed in PATH by extractStemmedNonStopWords
      * @return
      */
     public Consumer<Path> filePreprocessor(){
@@ -124,7 +114,7 @@ public class Main {
             } catch (IOException e) {
                 throw new UncheckedIOException(e);
             }
-            getPreProcessor(file.getFileName().toString(), stopWords).apply(fileAsList);
+            extractStemmedNonStopWords(file.getFileName().toString(), stopWords).apply(fileAsList);
         };
     }
 
@@ -154,17 +144,6 @@ public class Main {
                 .map(word -> word.toLowerCase())
                 .filter(word -> !word.trim().isEmpty())
                 .collect(Collectors.toSet());
-    }
-
-    /**
-     * PreProcessor returns a composite function that takes a raw data as Collection<String>
-     * then pre-process the data and return the final result 
-     * @param stopWords
-     * @return
-     */
-    public Function<Collection<String>, Collection<String>> getPreProcessor(String filename, Collection<String> stopWords){
-        return extractStemmedNonStopWords(filename, stopWords); 
-//              .andThen(buildIndexDocument(filename));
     }
 
     /**
@@ -210,28 +189,6 @@ public class Main {
     }
 
     /**
-     * 
-     * @param filePath
-     * @return
-     */
-    public Path generateTrainingData(Path filePath){
-        PRINTER.accept("generateTrainingData("+filePath+") start...");
-        PRINTER.accept("generateTrainingData("+filePath+") end with("+filePath+")");
-        return filePath;
-    }
-
-    /**
-     * 
-     * @param filePath
-     * @return
-     */
-    public Path generateTestingData(Path filePath){
-        PRINTER.accept("generateTestingData("+filePath+") start...");
-        PRINTER.accept("generateTestingData("+filePath+") end with("+filePath+")");
-        return filePath;
-    }
-
-    /**
      * This consumer writes the collection to filename
      * @param filename
      * @return
@@ -246,7 +203,7 @@ public class Main {
     }
     
     /**
-     * 
+     * This consumer write to fname 
      * @param fname
      * @return
      */

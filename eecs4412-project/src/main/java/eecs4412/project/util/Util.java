@@ -1,10 +1,15 @@
 package eecs4412.project.util;
 
+import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.LinkOption;
+import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.nio.file.DirectoryStream.Filter;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
+import java.util.function.Consumer;
 
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
@@ -27,7 +32,15 @@ public final class Util {
     public static final double DEFAULT_UPPER_PERCENTILE = 0.59;
     public static final double DEFAULT_LOWER_PERCENTILE = 0.01;
     public static final String DEFAULT_OUT_PATH = System.getProperty("user.dir");
-    
+
+    public static final Consumer<Object> PRINTER = System.out::println;
+    public static final Filter<Path> FILES_ONLY = new Filter<Path>(){
+        @Override
+        public boolean accept(Path entry) throws IOException {
+            return Files.isRegularFile(entry, LinkOption.NOFOLLOW_LINKS);
+        }
+    };
+
     /**
      * 
      * @param args
