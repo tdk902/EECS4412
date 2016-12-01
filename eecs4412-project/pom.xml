@@ -62,7 +62,7 @@
 				<version>3.0.0</version>
 				<configuration>
 					<descriptors>
-						<descriptor>src/main/resources/asseembler.xml</descriptor>
+						<descriptor>src/main/resources/assembler.xml</descriptor>
 					</descriptors>
 					<finalName>mailfilter</finalName>
 					<archive>
