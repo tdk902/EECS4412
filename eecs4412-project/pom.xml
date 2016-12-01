@@ -64,6 +64,11 @@
 					<descriptorRefs>
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
+					<archive>
+					  <manifest>
+						<mainClass>${main.class}</mainClass>
+					  </manifest>
+					</archive>
 				</configuration>
 			</plugin>
 		</plugins>
