@@ -65,11 +65,20 @@
 						<descriptorRef>jar-with-dependencies</descriptorRef>
 					</descriptorRefs>
 					<archive>
-					  <manifest>
-						<mainClass>${main.class}</mainClass>
-					  </manifest>
+						<manifest>
+							<mainClass>${main.class}</mainClass>
+						</manifest>
 					</archive>
 				</configuration>
+				<executions>
+					<execution>
+						<id>make-assembly</id>
+						<phase>package</phase>
+						<goals>
+							<goal>single</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 		<!-- Plugins Ends -->
