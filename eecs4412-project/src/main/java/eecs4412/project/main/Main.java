@@ -85,7 +85,7 @@ public class Main {
         }
         arffBuilder().accept(invertedIndexFile);
         fileProducer(outputPath).accept(arffDataModel.toString());
-        fileProducer(outputPath.resolve("invertedIndexFile.txt")).accept(invertedIndexFile.toString());
+        fileProducer(outputPath.getParent().resolve("testInvertedIndexFile.txt")).accept(invertedIndexFile.toString());
     }
 
     
@@ -107,7 +107,7 @@ public class Main {
         wordSelector().accept(invertedIndexFile);
         arffBuilder().accept(invertedIndexFile);
         fileProducer(outputPath).accept(arffDataModel.toString());
-        fileProducer(outputPath.resolve("invertedIndexFile.txt")).accept(invertedIndexFile.toString());
+        fileProducer(outputPath.getParent().resolve("trainInvertedIndexFile.txt")).accept(invertedIndexFile.toString());
     }
     
     /**
