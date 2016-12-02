@@ -116,6 +116,14 @@ public final class Util {
             if(commandline.getOptionValue(LOWER_PERCENT_ARG) != null){
                 lowerPercintile = Double.parseDouble(commandline.getOptionValue(LOWER_PERCENT_ARG));
             }
+            if(Double.compare(1d, upperPercintile) < 0
+                    || Double.compare(0d, upperPercintile) > 0){
+                throw new Exception();
+            }
+            if(Double.compare(1d, lowerPercintile) < 0
+                    || Double.compare(0d, lowerPercintile) > 0){
+                throw new Exception();
+            }
             if(Double.compare(upperPercintile, lowerPercintile) <= 0){
                 throw new Exception();
             }
